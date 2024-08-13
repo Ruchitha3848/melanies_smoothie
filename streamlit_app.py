@@ -1,7 +1,7 @@
 # Import python packages
 import streamlit as st
 import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+
 # st.text(fruityvice_response)
 
 # Write directly to the app
@@ -35,7 +35,7 @@ options = st.multiselect(
     "Choose upto 5 ingredients:",my_dataframe ,max_selections=5
    
 )
-fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
+
 
 if options:
     st.write("You selected:", options)
@@ -43,6 +43,8 @@ if options:
     ingredients_string=''
     for each in options:
         ingredients_string+=each+' '
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+        fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
     st.write(ingredients_string)
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients)
