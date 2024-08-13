@@ -1,6 +1,8 @@
 # Import python packages
 import streamlit as st
-
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+# st.text(fruityvice_response)
 
 # Write directly to the app
 st.title(":cup_with_straw: Customise Your Smoothie:cup_with_straw:")
@@ -33,6 +35,7 @@ options = st.multiselect(
     "Choose upto 5 ingredients:",my_dataframe ,max_selections=5
    
 )
+fv_df=st.dataframe(data=fruityvice_response.json(),use_container_width=True)
 
 if options:
     st.write("You selected:", options)
